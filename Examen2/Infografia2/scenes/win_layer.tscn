@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8niun3xdnnvo"]
+
+[ext_resource type="Script" path="res://scripts/win_layer.gd" id="1_cuu2c"]
+[ext_resource type="Texture2D" uid="uid://d2nlerh3csdks" path="res://assets/pieces/copa.webp" id="2_ot07b"]
+[ext_resource type="Animation" uid="uid://idi52v4e6kb" path="res://assets/slide_in.tres" id="3_akx0g"]
+[ext_resource type="Texture2D" uid="uid://bcns2y6qw8gl4" path="res://assets/pieces/retry_buttton-removebg-preview.png" id="3_t4d04"]
+
+[sub_resource type="Animation" id="Animation_echrs"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bmhvs"]
+_data = {
+"new_animation": SubResource("Animation_echrs"),
+"slide_in": ExtResource("3_akx0g")
+}
+
+[node name="CanvasLayer" type="CanvasLayer"]
+offset = Vector2(576, 0)
+transform = Transform2D(1, 0, 0, 1, 576, 0)
+script = ExtResource("1_cuu2c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_ot07b")
+
+[node name="TextureButton" type="TextureButton" parent="MarginContainer/TextureRect"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 1005.0
+offset_right = 633.001
+offset_bottom = 1505.0
+scale = Vector2(1.545, 1.545)
+texture_normal = ExtResource("3_t4d04")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bmhvs")
+}
+
+[connection signal="pressed" from="MarginContainer/TextureRect/TextureButton" to="." method="_on_texture_button_pressed"]
